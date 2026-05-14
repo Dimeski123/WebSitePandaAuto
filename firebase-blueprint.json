@@ -1,0 +1,31 @@
+{
+  "entities": {
+    "Car": {
+      "title": "Car",
+      "description": "A car listing for the dealership",
+      "type": "object",
+      "properties": {
+        "make": { "type": "string", "description": "Make of the car" },
+        "model": { "type": "string", "description": "Model of the car" },
+        "year": { "type": "number", "description": "Year of the car" },
+        "price": { "type": "number", "description": "Price of the car" },
+        "mileage": { "type": "number", "description": "Mileage in km" },
+        "fuelType": { "type": "string", "description": "Fuel type (e.g. Petrol, Diesel, Electric)" },
+        "transmission": { "type": "string", "description": "Transmission (e.g. Automatic, Manual)" },
+        "description": { "type": "string", "description": "Detailed description" },
+        "images": { "type": "array", "items": { "type": "string" }, "description": "Array of image URLs, up to 10" },
+        "category": { "type": "string", "description": "Vehicle category (e.g. SUV, Sedan)" },
+        "isPopular": { "type": "boolean", "description": "Whether the car is featured as popular" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["make", "model", "year", "price", "category", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/cars/{carId}": {
+      "schema": "Car",
+      "description": "Stores all car listings uploaded by the admin."
+    }
+  }
+}

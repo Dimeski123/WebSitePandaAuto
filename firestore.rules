@@ -1,0 +1,59 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() { 
+      return isSignedIn() && (
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+        || request.auth.token.email == 'chudharyohgami@gmail.com'
+      ); 
+    }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+
+    function isValidCar(data, isCreate) {
+      return data.keys().hasAll(['make', 'model', 'year', 'price', 'category'])
+        && data.make is string && data.make.size() > 0 && data.make.size() <= 100
+        && data.model is string && data.model.size() > 0 && data.model.size() <= 100
+        && data.year is number && data.year >= 1886 && data.year <= 2100
+        && data.price is number && data.price >= 0
+        && data.category is string && data.category.size() > 0 && data.category.size() <= 100
+        && (isCreate ? data.createdAt == request.time : true)
+        && (data.get('mileage', 0) is number && data.get('mileage', 0) >= 0)
+        && (data.get('fuelType', '') is string && data.get('fuelType', '').size() <= 50)
+        && (data.get('transmission', '') is string && data.get('transmission', '').size() <= 50)
+        && (data.get('description', '') is string && data.get('description', '').size() <= 5000)
+        && (data.get('images', []) is list && data.get('images', []).size() <= 10)
+        && (data.get('isPopular', false) is bool)
+        && (data.get('updatedAt', request.time) == request.time);
+    }
+
+    match /admins/{userId} {
+      allow get: if isSignedIn() && request.auth.uid == userId;
+      allow list: if false;
+      allow create, update, delete: if false; // Only manageable through Firebase Console natively
+    }
+
+    match /cars/{carId} {
+      // Anyone can see the cars
+      allow get: if isValidId(carId);
+      allow list: if true; 
+
+      allow create: if isValidId(carId) 
+                    && isAdmin()
+                    && isValidCar(incoming(), true);
+
+      allow update: if isValidId(carId)
+                    && isAdmin()
+                    && isValidCar(incoming(), false)
+                    && incoming().createdAt == existing().createdAt;
+
+      allow delete: if isValidId(carId) && isAdmin();
+    }
+  }
+}
