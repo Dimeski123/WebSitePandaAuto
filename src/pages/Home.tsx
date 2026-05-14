@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getPopularCars, Car } from '../firebase/cars';
+import { getPopularCars, Car } from '../api/cars';
 import CarCard from '../components/CarCard';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';

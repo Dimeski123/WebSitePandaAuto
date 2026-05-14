@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { addCar, updateCar, getCars, deleteCar, Car } from '../firebase/cars';
+import { addCar, updateCar, getCars, deleteCar, Car } from '../api/cars';
 import { Trash2, Plus, Image as ImageIcon, X, Upload, Edit } from 'lucide-react';
 
 const Admin: React.FC = () => {

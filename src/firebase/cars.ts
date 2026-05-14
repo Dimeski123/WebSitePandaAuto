@@ -15,57 +15,48 @@ export interface Car {
   updatedAt?: number;
 }
 
-const STORAGE_KEY = 'panda_auto_cars';
-
-const getStoredCars = (): Car[] => {
-  const data = localStorage.getItem(STORAGE_KEY);
-  return data ? JSON.parse(data) : [];
-};
-
-const saveStoredCars = (cars: Car[]) => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(cars));
-};
+// Tip: You might want to move this base URL into a .env file later (e.g. process.env.REACT_APP_API_URL)
+const API_BASE_URL = 'http://localhost:8000';
 
 export const getCars = async (): Promise<Car[]> => {
-  const cars = getStoredCars();
-  return cars.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  const response = await fetch(`${API_BASE_URL}/getCars.php`);
+  if (!response.ok) throw new Error('Failed to fetch cars');
+  return response.json();
 };
 
 export const getPopularCars = async (): Promise<Car[]> => {
-  const cars = getStoredCars().filter(c => c.isPopular);
-  return cars.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  const cars = await getCars();
+  return cars.filter(c => c.isPopular);
 };
 
 export const getCar = async (id: string): Promise<Car | null> => {
-  const cars = getStoredCars();
-  return cars.find(c => c.id === id) || null;
+  const cars = await getCars();
+  return cars.find(c => c.id?.toString() === id.toString()) || null;
 };
 
 export const addCar = async (car: Omit<Car, 'id' | 'createdAt' | 'updatedAt'>): Promise<void> => {
-  const cars = getStoredCars();
-  const newCar: Car = {
-    ...car,
-    id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(),
-    createdAt: Date.now(),
-    updatedAt: Date.now(),
-  };
-  cars.push(newCar);
-  saveStoredCars(cars);
+  const response = await fetch(`${API_BASE_URL}/addCar.php`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(car),
+  });
+  if (!response.ok) throw new Error('Failed to add car');
 };
 
 export const updateCar = async (id: string, car: Partial<Omit<Car, 'id' | 'createdAt' | 'updatedAt'>>): Promise<void> => {
-  const cars = getStoredCars();
-  const index = cars.findIndex(c => c.id === id);
-  if (index !== -1) {
-    cars[index] = { ...cars[index], ...car, updatedAt: Date.now() };
-    saveStoredCars(cars);
-  } else {
-    throw new Error("Car not found");
-  }
+  const response = await fetch(`${API_BASE_URL}/updateCar.php`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id, ...car }),
+  });
+  if (!response.ok) throw new Error('Failed to update car');
 };
 
 export const deleteCar = async (id: string): Promise<void> => {
-  let cars = getStoredCars();
-  cars = cars.filter(c => c.id !== id);
-  saveStoredCars(cars);
+  const response = await fetch(`${API_BASE_URL}/deleteCar.php`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id }),
+  });
+  if (!response.ok) throw new Error('Failed to delete car');
 };

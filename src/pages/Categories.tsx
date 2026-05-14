@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getCars, Car } from '../firebase/cars';
+import { getCars, Car } from '../api/cars';
 import CarCard from '../components/CarCard';
 import { Filter } from 'lucide-react';
 
