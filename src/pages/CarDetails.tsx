@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getCar, Car } from '../firebase/cars';
+import { getCar, Car } from '../api/cars';
 import { ChevronLeft, ChevronRight, ArrowLeft, Settings, Gauge, Fuel } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 

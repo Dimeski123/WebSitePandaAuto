@@ -10,7 +10,7 @@ const About: React.FC = () => {
         
         <div className="prose prose-lg text-white/60">
           <p className="text-lg mb-6 leading-relaxed">
-            Welcome to Panda Auto, Germany's premier destination for high-quality used vehicles. Located in the heart of Berlin, we've built our reputation on trust, transparency, and a genuine passion for cars.
+            Welcome to Panda Auto, Germany's premier destination for high-quality used vehicles. Located at Karl Mantel Straße 65, Krumbach 86381, we've built our reputation on trust, transparency, and a genuine passion for cars. You can reach us at +49 1729029816 or via email at info@pan-da-auto.com.
           </p>
           
           <img 

@@ -26,11 +26,13 @@ const Navbar: React.FC = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-2">
               {/* Simple stylistic logo with black and red */}
-              <div className="bg-red-600 p-2 rounded-lg flex items-center justify-center font-bold text-xl italic w-10 h-10">
-                P
-              </div>
+              <img 
+                src="/Images/HeaderPNG.png" 
+                alt="Panda Auto Logo" 
+                className="h-16 md:h-20 py-2 w-auto object-contain drop-shadow-md transition-all duration-300 hover:scale-105" 
+              />
               <span className="font-bold text-xl tracking-tighter uppercase text-white">
-                Panda Auto
+                <span className="text-red-600">Panda</span> Auto
               </span>
             </Link>
           </div>

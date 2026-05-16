@@ -7,11 +7,13 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="bg-red-600 p-2 rounded-lg flex items-center justify-center font-bold text-xl italic w-10 h-10">
-                P
-              </div>
-              <span className="font-bold text-xl tracking-tighter uppercase text-white">
+            <div className="flex items-center gap-3 mb-6">
+              <img 
+                src="/Images/LogoFinalPNG.png" 
+                alt="Panda Auto Logo" 
+                className="h-24 md:h-32 w-auto object-contain drop-shadow-xl transition-all duration-500 hover:scale-110" 
+              />
+              <span className="font-bold text-2xl md:text-3xl tracking-tighter uppercase text-white">
                 Panda Auto
               </span>
             </div>
@@ -33,15 +35,15 @@ const Footer: React.FC = () => {
             <ul className="space-y-3 text-white/60 text-sm uppercase tracking-widest text-xs">
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-red-600 shrink-0" />
-                <span>Berlin, Germany 10115</span>
+                <span>Karl Mantel Straße 65, Krumbach 86381</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-red-600 shrink-0" />
-                <span>+49 30 1234 5678</span>
+                <span>+49 1729029816</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-red-600 shrink-0" />
-                <span>info@pandaauto.de</span>
+                <span>info@pan-da-auto.com</span>
               </li>
             </ul>
           </div>

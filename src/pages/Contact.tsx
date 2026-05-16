@@ -20,7 +20,7 @@ const Contact: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-bold text-white uppercase tracking-widest text-xs">Our Location</h3>
-                <p className="text-white/60 text-sm mt-1">Alexanderplatz 1, 10178 Berlin, Germany</p>
+                <p className="text-white/60 text-sm mt-1">Karl Mantel Straße 65, Krumbach 86381</p>
               </div>
             </div>
             
@@ -30,7 +30,7 @@ const Contact: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-bold text-white uppercase tracking-widest text-xs">Phone Number</h3>
-                <p className="text-white/60 text-sm mt-1">+49 30 1234 5678</p>
+                <p className="text-white/60 text-sm mt-1">+49 1729029816</p>
               </div>
             </div>
             
@@ -40,7 +40,7 @@ const Contact: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-bold text-white uppercase tracking-widest text-xs">Email Address</h3>
-                <p className="text-white/60 text-sm mt-1">info@pandaauto.de</p>
+                <p className="text-white/60 text-sm mt-1">info@pan-da-auto.com</p>
               </div>
             </div>
 

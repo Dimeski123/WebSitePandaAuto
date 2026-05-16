@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';
-$db   = 'PandaAuto';
-$user = 'panda_auto';
+$db   = 'u916935423_PandaAuto';
+$user = 'u916935423_panda_auto';
 $pass = 'PandaAuto123!'; // Update with your MySQL password
 $charset = 'utf8mb4';
 
